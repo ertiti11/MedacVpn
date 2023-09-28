@@ -1,0 +1,37 @@
+---
+
+
+import Navbar from "../components/Navbar.astro";
+
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <meta name="generator" content={Astro.generator} /> -->
+    <title>{title}</title>
+  </head>
+  <body class="px-0 xl:px-40 sm:px-32"  style="position:absolute;pointer-events:none;inset:0;background-image:radial-gradient(circle 800px at center, rgba(72, 69, 255, 0.3), hsla(0, 0%, 0%, 0))">
+	<Navbar />
+    <slot />
+  </body>
+</html>
+<style is:global>
+   body {
+    font-family: "Roboto", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
+    
+  }
+  html{
+	background-color: black;
+  z-index: -999;
+  }
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Space+Grotesk:wght@500&display=swap");
+
+</style>

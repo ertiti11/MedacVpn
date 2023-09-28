@@ -1,0 +1,45 @@
+---
+import HeroIlustration from "../../public/Hero.svg";
+import Check from "../../public/check.svg";
+---
+
+<section class="w-full flex flex-col items-center pt-32 px-32">
+  <aside class="w-full flex">
+    <div class="w-full">
+      <span class="text-sm tracking-wider text-white font-bold uppercase">
+        medacVPN is here!
+      </span>
+      <div class="max-w-xl">
+        <h1 class="text-white text-6xl ">
+          La mejor VPN para tu seguridad y privacidad
+        </h1>
+        <div class="mt-12">
+          <ul class="text-white">
+            <li class="flex">
+              <img class="mr-4" src={Check.src} alt="" />
+               ecnripta tu conexión
+            </li>
+            <li class="flex">
+              <img class="mr-4" src={Check.src} alt="" />
+               Bloque anuncios y rastreadores
+            </li>
+            <li class="flex">
+              <img class="mr-4" src={Check.src} alt="" />
+                Accede a contenido restringido
+            </li>
+          </ul>
+        </div>
+        <button class="bg-white p-3 w-full/2 rounded hover:bg-black">
+          <span class="text-sm tracking-wider text-black font-bold uppercase">
+            Descargar
+          </span>
+        </button>
+      </div>
+    </div>
+    
+    
+    <div class="w-full items-center justify-center flex">
+      <img class="w-4/5" src={HeroIlustration.src} alt="" />
+    </div>
+  </aside>
+</section>
