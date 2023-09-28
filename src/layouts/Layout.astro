@@ -17,7 +17,7 @@ const { title } = Astro.props;
     <!-- <meta name="generator" content={Astro.generator} /> -->
     <title>{title}</title>
   </head>
-  <body class="px-0 xl:px-40 sm:px-32"  style="position:absolute;pointer-events:none;inset:0;background-image:radial-gradient(circle 800px at center, rgba(72, 69, 255, 0.3), hsla(0, 0%, 0%, 0))">
+  <body class="px-0 xl:px-40 sm:px-32"  style="position:absolute;inset:0;background-image:radial-gradient(circle 800px at center, rgba(72, 69, 255, 0.3), hsla(0, 0%, 0%, 0))">
 	<Navbar />
     <slot />
   </body>
@@ -30,7 +30,7 @@ const { title } = Astro.props;
   }
   html{
 	background-color: black;
-  z-index: -999;
+  z-index: -9999999;
   }
   @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Space+Grotesk:wght@500&display=swap");
 
