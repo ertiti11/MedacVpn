@@ -1,14 +1,14 @@
-import chalk from 'chalk'
+var colors = require('colors');
+
+colors.enable()
 
 
+const success = (message) => {
+  console.log(message.green);
+};
 
+const error = (message) => {
+  console.log(message.red);
+};
 
-export const success = (message) => {
-    console.log(chalk.green(message))
-}
-
-
-
-export const error = (message) => {
-    console.log(chalk.red(message))
-}
+module.exports = { success, error };

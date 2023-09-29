@@ -1,7 +1,7 @@
-import User from "../models/user.model.js";
-import bcrypt from "bcryptjs";
-import { createAccessToken } from "../libs/jwt.js";
-import { success } from "../libs/utils.js";
+const User = require("../models/user.model.js");
+const bcrypt = require("bcryptjs");
+const { createAccessToken } = require("../libs/jwt.js");
+const { success } = require("../libs/utils.js");
 
 // const CheckUser = async (req) => {
 //   console.log(req.body);
@@ -12,7 +12,7 @@ import { success } from "../libs/utils.js";
 //   return userFound;
 // };
 
-export const register = async (req, res) => {
+const register = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
@@ -24,7 +24,7 @@ export const register = async (req, res) => {
     const token = await createAccessToken({ id: newUserSaved._id });
 
     res.cookie("token", token);
-
+    res.status(201);
     res.json({
       id: newUserSaved._id,
       username: newUserSaved.username,
@@ -37,7 +37,7 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -66,7 +66,7 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = async (req, res) => {
+const logout = async (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
     secure: true,
@@ -75,7 +75,7 @@ export const logout = async (req, res) => {
   return res.sendStatus(200);
 };
 
-export const profile = async (req, res) => {
+const profile = async (req, res) => {
   const userFound = await User.findById(req.user.id);
   if (!userFound) return res.status(400).json({ message: "user not found" });
 
@@ -88,7 +88,7 @@ export const profile = async (req, res) => {
   });
 };
 
-export const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
   await User.findByIdAndDelete(req.user.id);
 
   res.json({
@@ -96,15 +96,15 @@ export const deleteUser = async (req, res) => {
   });
 };
 
-
-
 // TODO: update user
-export const updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
   const filter = { id: req.user.id };
   success(filter.id);
   const update = { age: 59 };
 
   const userFound = await User.findById(req.user.id);
   if (!userFound) return res.status(400).json({ message: "user not found" });
-  res.send("update user")
+  res.send("update user");
 };
+
+module.exports = { register, login, logout, profile, deleteUser, updateUser };

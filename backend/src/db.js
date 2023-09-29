@@ -1,6 +1,11 @@
-import mongoose from "mongoose";
-import {success, error} from "./libs/utils.js"
-export const connectDB = async () => {
+const mongoose = require("mongoose");
+const { success, error } = require("./libs/utils.js");
+
+
+
+
+
+async function connectDB () {
   try {
     await mongoose.connect("mongodb://localhost:27017/medacvpn");
     success("Database connected");
@@ -8,3 +13,7 @@ export const connectDB = async () => {
     error("Error connecting to database");
   }
 };
+
+
+
+module.exports = connectDB;

@@ -1,13 +1,9 @@
-import { Router } from "express";
-import {
-  register,
-  login,
-  logout,
-  profile,
-  deleteUser,updateUser
-} from "../controllers/auth.controllers.js";
-import { authRequired } from "../middlewares/validateToken.js";
-import { createKey } from "../controllers/key.controllers.js";
+const Router = require("express");
+const { register, login, logout, profile, deleteUser, updateUser } = require("../controllers/auth.controllers.js");
+const { authRequired } = require("../middlewares/validateToken.js");
+const { createKey } = require("../controllers/key.controllers.js");
+
+
 const router = Router();
 
 router.post("/register", register);
@@ -25,4 +21,4 @@ router.post("/delete", authRequired, deleteUser)
 router.post("/update", authRequired, updateUser)
 
 
-export default router;
+module.exports = router;

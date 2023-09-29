@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+const mongoose = require("mongoose");
 // :method :url :status :res[content-length] - :response-time ms
 const logSchema = new mongoose.Schema(
   {
@@ -39,4 +38,6 @@ const logSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Log", logSchema);
+
+module.exports = mongoose.model("Log", logSchema);
+

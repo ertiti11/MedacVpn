@@ -1,7 +1,7 @@
-import { SECRET } from "../config.js";
-import jwt from "jsonwebtoken";
+const { SECRET } = require("../config.js");
+const jwt = require("jsonwebtoken");
 
-export async function createAccessToken(payload) {
+async function createAccessToken(payload) {
   return new Promise((resolve, reject) => {
     jwt.sign(payload, SECRET, { expiresIn: "1d" }, (err, token) => {
       if (err) reject(err);
@@ -9,3 +9,8 @@ export async function createAccessToken(payload) {
     });
   });
 }
+
+
+
+
+module.exports = { createAccessToken };

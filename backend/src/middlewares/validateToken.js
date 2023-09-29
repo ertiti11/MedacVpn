@@ -1,6 +1,9 @@
-import jwt from "jsonwebtoken";
-import { SECRET } from "../config.js";
-export const authRequired = (req, res, next) => {
+const jwt = require("jsonwebtoken");
+const { SECRET } = require("../config.js");
+
+
+
+const authRequired = (req, res, next) => {
   const { token } = req.cookies;
 
   if (!token) return res.status(401).json({ message: "unauthorized" });
@@ -12,3 +15,7 @@ export const authRequired = (req, res, next) => {
 
   next();
 };
+
+
+
+module.exports = { authRequired };

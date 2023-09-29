@@ -1,6 +1,7 @@
-import { exec } from "child_process";
+const exec = require("child_process").exec;
 
-export async function shell(cmd) {
+
+async function shell(cmd) {
   return new Promise(function (resolve, reject) {
     exec(cmd, (err, stdout, stderr) => {
       if (err) {
@@ -11,3 +12,6 @@ export async function shell(cmd) {
     });
   });
 }
+
+
+module.exports = { shell }; 
