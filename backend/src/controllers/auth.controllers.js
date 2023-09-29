@@ -14,6 +14,7 @@ const { success } = require("../libs/utils.js");
 
 const register = async (req, res) => {
   const { username, email, password } = req.body;
+  success(req.body);
 
   try {
     const passwordHash = await bcrypt.hash(password, 10);
@@ -78,7 +79,7 @@ const logout = async (req, res) => {
 const profile = async (req, res) => {
   const userFound = await User.findById(req.user.id);
   if (!userFound) return res.status(400).json({ message: "user not found" });
-
+  res.status(200)
   res.json({
     id: userFound._id,
     username: userFound.username,
