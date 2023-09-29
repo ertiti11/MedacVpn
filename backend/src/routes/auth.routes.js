@@ -4,7 +4,7 @@ import {
   login,
   logout,
   profile,
-  deleteUser
+  deleteUser,updateUser
 } from "../controllers/auth.controllers.js";
 import { authRequired } from "../middlewares/validateToken.js";
 import { createKey } from "../controllers/key.controllers.js";
@@ -21,6 +21,8 @@ router.get("/profile", authRequired, profile);
 router.get("/keys", authRequired, createKey);
 
 router.post("/delete", authRequired, deleteUser)
+
+router.post("/update", authRequired, updateUser)
 
 
 export default router;

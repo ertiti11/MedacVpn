@@ -1,6 +1,16 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { createAccessToken } from "../libs/jwt.js";
+import { success } from "../libs/utils.js";
+
+// const CheckUser = async (req) => {
+//   console.log(req.body);
+//   const userFound = await User.findById(req.user.id);
+//   if (!userFound) return res.status(400).json({ message: "user not found" });
+//   console.log("yeeeeeeeeees");
+
+//   return userFound;
+// };
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -78,17 +88,23 @@ export const profile = async (req, res) => {
   });
 };
 
-
-
 export const deleteUser = async (req, res) => {
-  const userFound = await User.findById(req.user.id);
-  if (!userFound) return res.status(400).json({ message: "user not found" });
-
-  await User.findByIdAndDelete(req.user.id)
+  await User.findByIdAndDelete(req.user.id);
 
   res.json({
-    message: "user deleted"
-  })
+    message: "user deleted",
+  });
+};
 
 
-}
+
+// TODO: update user
+export const updateUser = async (req, res) => {
+  const filter = { id: req.user.id };
+  success(filter.id);
+  const update = { age: 59 };
+
+  const userFound = await User.findById(req.user.id);
+  if (!userFound) return res.status(400).json({ message: "user not found" });
+  res.send("update user")
+};

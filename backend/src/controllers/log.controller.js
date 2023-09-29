@@ -14,7 +14,7 @@ export const Logger =  (req) => {
         responseTime: req[5]
     });
     newLog.save();
-    console.log(newLog)
+    
 
    
 
