@@ -77,3 +77,18 @@ export const profile = async (req, res) => {
     updatedAt: userFound.updatedAt,
   });
 };
+
+
+
+export const deleteUser = async (req, res) => {
+  const userFound = await User.findById(req.user.id);
+  if (!userFound) return res.status(400).json({ message: "user not found" });
+
+  await User.findByIdAndDelete(req.user.id)
+
+  res.json({
+    message: "user deleted"
+  })
+
+
+}
