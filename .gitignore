@@ -1,0 +1,19 @@
+# Ignora los directorios específicos en la carpeta cliente
+cliente/node_modules/
+cliente/build/
+cliente/dist/
+
+# Ignora los archivos de configuración específicos en la carpeta cliente
+cliente/.env
+
+# Ignora los directorios específicos en la carpeta servidor
+servidor/node_modules/
+servidor/build/
+servidor/dist/
+
+# Ignora los archivos de configuración específicos en la carpeta servidor
+servidor/.env
+
+# Ignora los archivos generados por sistemas operativos
+.DS_Store
+Thumbs.db
