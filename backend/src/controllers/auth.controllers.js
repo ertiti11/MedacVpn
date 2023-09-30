@@ -20,6 +20,15 @@ const register = async (req, res) => {
     const passwordHash = await bcrypt.hash(password, 10);
 
     const newUser = new User({ username, email, password: passwordHash });
+
+    //comprobe if user exist
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "Username or email already exists" });
+    }
+
     const newUserSaved = await newUser.save();
 
     const token = await createAccessToken({ id: newUserSaved._id });
@@ -79,7 +88,7 @@ const logout = async (req, res) => {
 const profile = async (req, res) => {
   const userFound = await User.findById(req.user.id);
   if (!userFound) return res.status(400).json({ message: "user not found" });
-  res.status(200)
+  res.status(200);
   res.json({
     id: userFound._id,
     username: userFound.username,

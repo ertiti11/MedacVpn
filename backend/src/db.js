@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { success, error } = require("./libs/utils.js");
 const { MONGODB_URI_PROD, MONGODB_URI_DEV } = require("./config.js");
-
+console.log(process.env.NODE_ENV);
 async function connectDB() {
   try {
     if (process.env.NODE_ENV === "production") {
@@ -12,7 +12,7 @@ async function connectDB() {
       success("Database connected");
     }
   } catch (error) {
-    error("Database connection failed: ", error);
+    console.log("Database connection failed: ", error);
     process.exit(1);
   }
 }
