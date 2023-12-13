@@ -12,12 +12,16 @@ beforeAll(async () => {
   await mongoose.connection.dropDatabase();
 });
 
+
+
+
+
 test("register user", async () => {
   const passwordHash = await bcrypt.hash("test123", 10);
 
   const newUser = {
-    username: "test",
-    email: "test@gmail.com",
+    username: "testt",
+    email: "testt@gmail.com",
     password: passwordHash,
   };
   await api
@@ -50,6 +54,18 @@ test("GET /api/profile without cookie", async () => {
   await api
     .get("/api/profile")
     .expect(401)
+    .expect("Content-Type", /application\/json/);
+});
+
+test("login user", async () => {
+  const user = {
+    email: "test@gmail.com",
+    password: "test123",
+  };
+  const res = await api
+    .post("/api/login")
+    .send(user)
+    .expect(200)
     .expect("Content-Type", /application\/json/);
 });
 
