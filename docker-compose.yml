@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+
+  wireguard:
+    image: linuxserver/wireguard
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Mendoza
+      - SERVERURL=172.233.254.178 #optional
+      - SERVERPORT=51820 #optional      
+    volumes:
+      - ./config:/config
+    ports:
+      - 51820:51820/udp
+      - "5000:5000"
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
+
+  wireguard-ui:
+    image: ngoduykhanh/wireguard-ui:latest
+    container_name: wireguard-ui
+    depends_on:
+      - wireguard
+    cap_add:
+      - NET_ADMIN
+    # use the network of the 'wireguard' service. this enables to show active clients in the status page
+    network_mode: service:wireguard
+    environment:
+      - WGUI_ENDPOINT_ADDRESS=172.233.254.178
+      - WGUI_USERNAME=admin
+      - WGUI_PASSWORD=admin
+      - WGUI_DNS=10.0.0.1
+      
+      
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+    volumes:
+      - ./db:/app/db
+      - ./config:/etc/wireguard
