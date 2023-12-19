@@ -2,20 +2,32 @@
 FROM node:latest
 
 # Crear el directorio de la aplicación en el contenedor
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copiar package.json y package-lock.json
-COPY package*.json ./
-
-RUN npm install -g pnpm
-# Instalar las dependencias
-RUN pnpm install
-
-# Copiar el resto del código de la aplicación
 COPY . .
 
-# Exponer el puerto en el que se ejecutará la aplicación
-EXPOSE 3000
+# Instalar las dependencias
+RUN npm install
 
-# Comando para iniciar la aplicación
-CMD [ "node", "app.js" ]
+RUN sudo apt-get update && sudo apt-get install -y wget
+
+RUN sudo wget https://github.com/naggie/dsnet/releases/latest/download/dsnet-linux-amd64 -O /usr/local/bin/dsnet
+RUN sudo chmod +x /usr/local/bin/dsnet
+RUN sudo dsnet init
+# edit /etc/dsnetconfig.json to taste
+RUN sudo dsnet up
+RUN sudo dsnet add banana > dsnet-banana.conf
+RUN sudo dsnet add apple > dsnet-apple.conf
+# enable IP forwarding to allow peers to talk to one another
+RUN sudo sysctl -w net.ipv4.ip_forward=1   # edit /etc/sysctl.conf to make this persistent across reboots
+
+
+
+
+
+
+
+# Exponer el puerto en el que se ejecutará la aplicación
+
+ENTRYPOINT ["node", "src/index.js"]º
+EXPOSE 3000

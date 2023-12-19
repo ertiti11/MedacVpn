@@ -17,3 +17,4 @@ servidor/.env
 # Ignora los archivos generados por sistemas operativos
 .DS_Store
 Thumbs.db
+pivpn-docker
