@@ -1,0 +1,21 @@
+# Establecer la imagen base
+FROM node:latest
+
+# Crear el directorio de la aplicación en el contenedor
+WORKDIR /usr/src/app
+
+# Copiar package.json y package-lock.json
+COPY package*.json ./
+
+RUN npm install -g pnpm
+# Instalar las dependencias
+RUN pnpm install
+
+# Copiar el resto del código de la aplicación
+COPY . .
+
+# Exponer el puerto en el que se ejecutará la aplicación
+EXPOSE 3000
+
+# Comando para iniciar la aplicación
+CMD [ "node", "app.js" ]

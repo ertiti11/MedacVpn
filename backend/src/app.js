@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const authRoutes = require("./routes/auth.routes.js");
 const cookieParser = require("cookie-parser");
 const { Logger } = require("./controllers/log.controller.js");
-import helmet from "helmet";
+const helmet = require("helmet");
 
 const app = express();
 app.use(helmet());
